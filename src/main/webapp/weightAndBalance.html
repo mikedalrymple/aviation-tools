@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>N96988 Weight and Balance Sheet</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+	var stations = [ {
+		name : "Empty Aircraft",
+		weight : 1878.99,
+		arm : 36.61
+	}, {
+		name : "Fuel",
+		weight : 0,
+		arm : 37
+	}, {
+		name : "Front Seats",
+		weight : 0,
+		arm : 74
+	}, {
+		name : "Rear Seats",
+		weight : 0,
+		arm : 97
+	}, {
+		name : "Baggage A",
+		weight : 0,
+		arm : 48
+	} ];
+
+	// 	function createTable() {
+	// 		for( var i = 0; i < stations.length; i++) {
+	// 			$('#wbTable').append('<tr><td>' + stations[i].name + '</td>' + 
+	// 					'<td><input type="text" id="w' + i + '" value="' + stations[i].weight + '" /></td>' + 
+	// 					'<td><input type="text" id="a' + i + '" value="' + stations[i].arm + '" /></td>' + 
+	// 					'<td><input type="text" id="m' + i + '" value="' + stations[i].weight * stations[i].arm + '" /></td></tr>');
+	// 		}
+	// 	}
+
+	function createTable() {
+		for ( var i = 0; i < stations.length; i++) {
+			weightInput = $('<input>');
+			newRow = $('<tr>').append($('<td>').html(stations[i].name)).append(
+					$('<td>').html(stations[i].weight)).append(
+					$('<td>').html(stations[i].arm)).append(
+					$('<td>').html(stations[i].weight));
+			$('#wbTable').append(newRow);
+		}
+	}
+
+	function calculateTable() {
+		for ( var i = 0; i < 5; i++) {
+			var moment = $("#w" + i).val();
+			$("#m" + i).val($("#w" + i).val() * $("#a" + i).val());
+		}
+	}
+	$(document).ready(function() {
+		createTable();
+		$("input").keyup(function() {
+			calculateTable();
+		});
+	});
+</script>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Weight</th>
+        <th>Arm</th>
+        <th>Moment</th>
+      </tr>
+    </thead>
+    <tbody id="wbTable">
+    </tbody>
+  </table>
+</body>
+</html>
